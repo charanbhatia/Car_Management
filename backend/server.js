@@ -6,14 +6,31 @@ const authRoutes = require('./routes/auth.routes');
 const carRoutes = require('./routes/car.routes');
 const errorHandler = require('./middleware/error.middleware');
 
-
 const app = express();
 
 connectDB();
 
-app.use(cors());
+// CORS configuration
+const corsOptions = {
+  origin: [
+    'http://localhost:3000',
+    'https://car-management-m7koy12sk-charanjeets-projects-bc2d98f4.vercel.app',
+    // Add any other allowed origins here
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Health check route
+app.get('/', (req, res) => {
+  res.json({ message: 'Server is running' });
+});
 
 app.use('/api/auth', authRoutes);
 app.use('/api/cars', carRoutes);
