@@ -14,6 +14,8 @@ connectDB();
 const corsOptions = {
   origin: [
     'http://localhost:3000',
+    'https://car-management-frontend-lovat.vercel.app/',
+    'https://car-management-frontend-gcfvbfxvv-charanjeets-projects-bc2d98f4.vercel.app/'
     '*',
 
     // Add any other allowed origins here
