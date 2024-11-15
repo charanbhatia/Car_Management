@@ -7,15 +7,13 @@ const carRoutes = require('./routes/car.routes');
 const errorHandler = require('./middleware/error.middleware');
 
 const app = express();
-
 connectDB();
 
-// CORS configuration
 const corsOptions = {
   origin: [
     'http://localhost:3000',
-    'https://car-management-m7koy12sk-charanjeets-projects-bc2d98f4.vercel.app',
-    // Add any other allowed origins here
+    '*',
+    // Add your production frontend URL here
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -34,8 +32,13 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/cars', carRoutes);
-
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+// For local development
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+}
+
+// For Vercel
+module.exports = app;
