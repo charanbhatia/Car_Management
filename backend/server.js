@@ -15,6 +15,8 @@ const corsOptions = {
   origin: [
     'http://localhost:3000',
     'https://car-management-m7koy12sk-charanjeets-projects-bc2d98f4.vercel.app',
+    'https://car-management-front-4khts08wo-charanjeets-projects-bc2d98f4.vercel.app/',
+
     // Add any other allowed origins here
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
